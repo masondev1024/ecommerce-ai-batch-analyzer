@@ -4130,3 +4130,24 @@
 [2026-04-19T22:44:25.353+0900] {logging_mixin.py:188} INFO - [2026-04-19T22:44:25.353+0900] {dag.py:3089} INFO - Sync 1 DAGs
 [2026-04-19T22:44:25.368+0900] {logging_mixin.py:188} INFO - [2026-04-19T22:44:25.368+0900] {dag.py:3947} INFO - Setting next_dagrun for review_sentiment_pipeline to 2026-04-18 00:00:00+00:00, run_after=2026-04-19 00:00:00+00:00
 [2026-04-19T22:44:25.379+0900] {processor.py:183} INFO - Processing /opt/airflow/dags/review_sentiment_pipeline.py took 0.065 seconds
+[2026-04-19T22:44:55.768+0900] {processor.py:161} INFO - Started process (PID=1107) to work on /opt/airflow/dags/review_sentiment_pipeline.py
+[2026-04-19T22:44:55.771+0900] {processor.py:830} INFO - Processing file /opt/airflow/dags/review_sentiment_pipeline.py for tasks to queue
+[2026-04-19T22:44:55.772+0900] {logging_mixin.py:188} INFO - [2026-04-19T22:44:55.771+0900] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/review_sentiment_pipeline.py
+[2026-04-19T22:44:55.782+0900] {processor.py:840} INFO - DAG(s) 'review_sentiment_pipeline' retrieved from /opt/airflow/dags/review_sentiment_pipeline.py
+[2026-04-19T22:44:55.809+0900] {logging_mixin.py:188} INFO - [2026-04-19T22:44:55.809+0900] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-19T22:44:55.825+0900] {logging_mixin.py:188} INFO - [2026-04-19T22:44:55.824+0900] {dag.py:3947} INFO - Setting next_dagrun for review_sentiment_pipeline to 2026-04-18 00:00:00+00:00, run_after=2026-04-19 00:00:00+00:00
+[2026-04-19T22:44:55.835+0900] {processor.py:183} INFO - Processing /opt/airflow/dags/review_sentiment_pipeline.py took 0.072 seconds
+[2026-04-19T22:45:26.196+0900] {processor.py:161} INFO - Started process (PID=1123) to work on /opt/airflow/dags/review_sentiment_pipeline.py
+[2026-04-19T22:45:26.200+0900] {processor.py:830} INFO - Processing file /opt/airflow/dags/review_sentiment_pipeline.py for tasks to queue
+[2026-04-19T22:45:26.201+0900] {logging_mixin.py:188} INFO - [2026-04-19T22:45:26.200+0900] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/review_sentiment_pipeline.py
+[2026-04-19T22:45:26.215+0900] {processor.py:840} INFO - DAG(s) 'review_sentiment_pipeline' retrieved from /opt/airflow/dags/review_sentiment_pipeline.py
+[2026-04-19T22:45:26.238+0900] {logging_mixin.py:188} INFO - [2026-04-19T22:45:26.238+0900] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-19T22:45:26.250+0900] {logging_mixin.py:188} INFO - [2026-04-19T22:45:26.250+0900] {dag.py:3947} INFO - Setting next_dagrun for review_sentiment_pipeline to 2026-04-18 00:00:00+00:00, run_after=2026-04-19 00:00:00+00:00
+[2026-04-19T22:45:26.258+0900] {processor.py:183} INFO - Processing /opt/airflow/dags/review_sentiment_pipeline.py took 0.074 seconds
+[2026-04-19T22:45:56.628+0900] {processor.py:161} INFO - Started process (PID=1139) to work on /opt/airflow/dags/review_sentiment_pipeline.py
+[2026-04-19T22:45:56.630+0900] {processor.py:830} INFO - Processing file /opt/airflow/dags/review_sentiment_pipeline.py for tasks to queue
+[2026-04-19T22:45:56.631+0900] {logging_mixin.py:188} INFO - [2026-04-19T22:45:56.630+0900] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/review_sentiment_pipeline.py
+[2026-04-19T22:45:56.642+0900] {processor.py:840} INFO - DAG(s) 'review_sentiment_pipeline' retrieved from /opt/airflow/dags/review_sentiment_pipeline.py
+[2026-04-19T22:45:56.676+0900] {logging_mixin.py:188} INFO - [2026-04-19T22:45:56.676+0900] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-04-19T22:45:56.698+0900] {logging_mixin.py:188} INFO - [2026-04-19T22:45:56.698+0900] {dag.py:3947} INFO - Setting next_dagrun for review_sentiment_pipeline to 2026-04-18 00:00:00+00:00, run_after=2026-04-19 00:00:00+00:00
+[2026-04-19T22:45:56.710+0900] {processor.py:183} INFO - Processing /opt/airflow/dags/review_sentiment_pipeline.py took 0.088 seconds
