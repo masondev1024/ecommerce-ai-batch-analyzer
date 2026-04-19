@@ -1,0 +1,38 @@
+[2026-04-19T22:07:09.794+0900] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-19T22:07:09.818+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: review_sentiment_pipeline_v2.load_analyzed_reviews scheduled__2026-04-18T00:00:00+00:00 [queued]>
+[2026-04-19T22:07:09.824+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: review_sentiment_pipeline_v2.load_analyzed_reviews scheduled__2026-04-18T00:00:00+00:00 [queued]>
+[2026-04-19T22:07:09.824+0900] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-04-19T22:07:09.833+0900] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_analyzed_reviews> on 2026-04-18 00:00:00+00:00
+[2026-04-19T22:07:09.837+0900] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'review_sentiment_pipeline_v2', 'load_analyzed_reviews', 'scheduled__2026-04-18T00:00:00+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/review_sentiment_pipeline_v2.py', '--cfg-path', '/tmp/tmp6au1t39a']
+[2026-04-19T22:07:09.839+0900] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=636) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-19T22:07:09.840+0900] {standard_task_runner.py:64} INFO - Started process 637 to run task
+[2026-04-19T22:07:09.839+0900] {standard_task_runner.py:91} INFO - Job 9: Subtask load_analyzed_reviews
+[2026-04-19T22:07:09.875+0900] {task_command.py:426} INFO - Running <TaskInstance: review_sentiment_pipeline_v2.load_analyzed_reviews scheduled__2026-04-18T00:00:00+00:00 [running]> on host e9154cda290f
+[2026-04-19T22:07:09.931+0900] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data-team' AIRFLOW_CTX_DAG_ID='review_sentiment_pipeline_v2' AIRFLOW_CTX_TASK_ID='load_analyzed_reviews' AIRFLOW_CTX_EXECUTION_DATE='2026-04-18T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-04-18T00:00:00+00:00'
+[2026-04-19T22:07:09.931+0900] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-19T22:07:09.947+0900] {python.py:237} INFO - Done. Returned value was: 0
+[2026-04-19T22:07:09.948+0900] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-19T22:07:09.961+0900] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=review_sentiment_pipeline_v2, task_id=load_analyzed_reviews, run_id=scheduled__2026-04-18T00:00:00+00:00, execution_date=20260418T000000, start_date=20260419T130709, end_date=20260419T130709
+[2026-04-19T22:07:09.980+0900] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-19T22:07:09.991+0900] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-04-19T22:07:09.993+0900] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-04-19T22:19:24.177+0900] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-19T22:19:24.200+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: review_sentiment_pipeline_v2.load_analyzed_reviews scheduled__2026-04-18T00:00:00+00:00 [queued]>
+[2026-04-19T22:19:24.205+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: review_sentiment_pipeline_v2.load_analyzed_reviews scheduled__2026-04-18T00:00:00+00:00 [queued]>
+[2026-04-19T22:19:24.205+0900] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-04-19T22:19:24.213+0900] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_analyzed_reviews> on 2026-04-18 00:00:00+00:00
+[2026-04-19T22:19:24.217+0900] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'review_sentiment_pipeline_v2', 'load_analyzed_reviews', 'scheduled__2026-04-18T00:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/review_sentiment_pipeline_v2.py', '--cfg-path', '/tmp/tmptfbwu4ue']
+[2026-04-19T22:19:24.219+0900] {standard_task_runner.py:91} INFO - Job 7: Subtask load_analyzed_reviews
+[2026-04-19T22:19:24.218+0900] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=286) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-19T22:19:24.220+0900] {standard_task_runner.py:64} INFO - Started process 287 to run task
+[2026-04-19T22:19:24.252+0900] {task_command.py:426} INFO - Running <TaskInstance: review_sentiment_pipeline_v2.load_analyzed_reviews scheduled__2026-04-18T00:00:00+00:00 [running]> on host 75b64548869f
+[2026-04-19T22:19:24.303+0900] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data-team' AIRFLOW_CTX_DAG_ID='review_sentiment_pipeline_v2' AIRFLOW_CTX_TASK_ID='load_analyzed_reviews' AIRFLOW_CTX_EXECUTION_DATE='2026-04-18T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-04-18T00:00:00+00:00'
+[2026-04-19T22:19:24.303+0900] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-19T22:19:24.332+0900] {base.py:84} INFO - Using connection ID 'mysql_reviews' for task execution.
+[2026-04-19T22:19:24.347+0900] {review_sentiment_pipeline_v2.py:220} INFO - Updated 20 reviews
+[2026-04-19T22:19:24.348+0900] {python.py:237} INFO - Done. Returned value was: 20
+[2026-04-19T22:19:24.348+0900] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-19T22:19:24.363+0900] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=review_sentiment_pipeline_v2, task_id=load_analyzed_reviews, run_id=scheduled__2026-04-18T00:00:00+00:00, execution_date=20260418T000000, start_date=20260419T131924, end_date=20260419T131924
+[2026-04-19T22:19:24.403+0900] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-19T22:19:24.415+0900] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-04-19T22:19:24.416+0900] {local_task_job_runner.py:222} INFO - ::endgroup::

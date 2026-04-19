@@ -1,0 +1,20 @@
+[2026-04-19T21:14:58.754+0900] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-19T21:14:58.780+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: review_sentiment_pipeline.load_analyzed_reviews manual__2026-04-19T12:14:38.000726+00:00 [queued]>
+[2026-04-19T21:14:58.784+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: review_sentiment_pipeline.load_analyzed_reviews manual__2026-04-19T12:14:38.000726+00:00 [queued]>
+[2026-04-19T21:14:58.785+0900] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-04-19T21:14:58.792+0900] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_analyzed_reviews> on 2026-04-19 12:14:38.000726+00:00
+[2026-04-19T21:14:58.796+0900] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'review_sentiment_pipeline', 'load_analyzed_reviews', 'manual__2026-04-19T12:14:38.000726+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/review_sentiment_pipeline.py', '--cfg-path', '/tmp/tmpxyltm49k']
+[2026-04-19T21:14:58.799+0900] {standard_task_runner.py:91} INFO - Job 30: Subtask load_analyzed_reviews
+[2026-04-19T21:14:58.798+0900] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=255) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-19T21:14:58.800+0900] {standard_task_runner.py:64} INFO - Started process 256 to run task
+[2026-04-19T21:14:58.832+0900] {task_command.py:426} INFO - Running <TaskInstance: review_sentiment_pipeline.load_analyzed_reviews manual__2026-04-19T12:14:38.000726+00:00 [running]> on host 3d14a4531643
+[2026-04-19T21:14:58.886+0900] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data-team' AIRFLOW_CTX_DAG_ID='review_sentiment_pipeline' AIRFLOW_CTX_TASK_ID='load_analyzed_reviews' AIRFLOW_CTX_EXECUTION_DATE='2026-04-19T12:14:38.000726+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-19T12:14:38.000726+00:00'
+[2026-04-19T21:14:58.886+0900] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-19T21:14:58.922+0900] {base.py:84} INFO - Using connection ID 'mysql_reviews' for task execution.
+[2026-04-19T21:14:58.946+0900] {review_sentiment_pipeline.py:163} INFO - Updated 20 reviews
+[2026-04-19T21:14:58.946+0900] {python.py:237} INFO - Done. Returned value was: 20
+[2026-04-19T21:14:58.947+0900] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-19T21:14:58.961+0900] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=review_sentiment_pipeline, task_id=load_analyzed_reviews, run_id=manual__2026-04-19T12:14:38.000726+00:00, execution_date=20260419T121438, start_date=20260419T121458, end_date=20260419T121458
+[2026-04-19T21:14:58.984+0900] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-04-19T21:14:58.995+0900] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-04-19T21:14:58.996+0900] {local_task_job_runner.py:222} INFO - ::endgroup::

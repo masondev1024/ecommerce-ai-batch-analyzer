@@ -1,0 +1,51 @@
+[2026-04-19T16:06:40.349+0900] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-19T16:06:40.374+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: review_sentiment_pipeline.call_review_api manual__2026-04-19T07:04:01.434788+00:00 [queued]>
+[2026-04-19T16:06:40.378+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: review_sentiment_pipeline.call_review_api manual__2026-04-19T07:04:01.434788+00:00 [queued]>
+[2026-04-19T16:06:40.378+0900] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2026-04-19T16:06:40.386+0900] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): call_review_api> on 2026-04-19 07:04:01.434788+00:00
+[2026-04-19T16:06:40.395+0900] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=288) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-19T16:06:40.393+0900] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'review_sentiment_pipeline', 'call_review_api', 'manual__2026-04-19T07:04:01.434788+00:00', '--job-id', '31', '--raw', '--subdir', 'DAGS_FOLDER/review_sentiment_pipeline.py', '--cfg-path', '/tmp/tmpjey9xkto']
+[2026-04-19T16:06:40.396+0900] {standard_task_runner.py:91} INFO - Job 31: Subtask call_review_api
+[2026-04-19T16:06:40.396+0900] {standard_task_runner.py:64} INFO - Started process 289 to run task
+[2026-04-19T16:06:40.457+0900] {task_command.py:426} INFO - Running <TaskInstance: review_sentiment_pipeline.call_review_api manual__2026-04-19T07:04:01.434788+00:00 [running]> on host efbd7783194d
+[2026-04-19T16:06:40.516+0900] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data-team' AIRFLOW_CTX_DAG_ID='review_sentiment_pipeline' AIRFLOW_CTX_TASK_ID='call_review_api' AIRFLOW_CTX_EXECUTION_DATE='2026-04-19T07:04:01.434788+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-19T07:04:01.434788+00:00'
+[2026-04-19T16:06:40.517+0900] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-19T16:06:40.539+0900] {review_sentiment_pipeline.py:76} INFO - Sending chunk 1 with 5 reviews
+[2026-04-19T16:07:07.426+0900] {review_sentiment_pipeline.py:76} INFO - Sending chunk 2 with 5 reviews
+[2026-04-19T16:07:52.489+0900] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-19T16:07:52.496+0900] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/review_sentiment_pipeline.py", line 80, in call_review_api
+    logging.info("No pending reviews to process.")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: http://ai-api-server:8000/analyze_reviews
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/review_sentiment_pipeline.py", line 86, in call_review_api
+    all_results: List[Dict[str, Any]] = []
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Failed on API chunk 2: 502 Server Error: Bad Gateway for url: http://ai-api-server:8000/analyze_reviews
+[2026-04-19T16:07:52.520+0900] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=review_sentiment_pipeline, task_id=call_review_api, run_id=manual__2026-04-19T07:04:01.434788+00:00, execution_date=20260419T070401, start_date=20260419T070640, end_date=20260419T070752
+[2026-04-19T16:07:52.537+0900] {standard_task_runner.py:110} ERROR - Failed to execute job 31 for task call_review_api (Failed on API chunk 2: 502 Server Error: Bad Gateway for url: http://ai-api-server:8000/analyze_reviews; 289)
+[2026-04-19T16:07:52.593+0900] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-04-19T16:07:52.616+0900] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-04-19T16:07:52.619+0900] {local_task_job_runner.py:222} INFO - ::endgroup::

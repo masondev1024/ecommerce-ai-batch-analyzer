@@ -1,0 +1,77 @@
+[2026-04-19T20:42:06.026+0900] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-19T20:42:06.059+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: review_sentiment_pipeline.call_review_api manual__2026-04-19T11:38:30.391689+00:00 [queued]>
+[2026-04-19T20:42:06.064+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: review_sentiment_pipeline.call_review_api manual__2026-04-19T11:38:30.391689+00:00 [queued]>
+[2026-04-19T20:42:06.064+0900] {taskinstance.py:2306} INFO - Starting attempt 2 of 2
+[2026-04-19T20:42:06.073+0900] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): call_review_api> on 2026-04-19 11:38:30.391689+00:00
+[2026-04-19T20:42:06.080+0900] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'review_sentiment_pipeline', 'call_review_api', 'manual__2026-04-19T11:38:30.391689+00:00', '--job-id', '26', '--raw', '--subdir', 'DAGS_FOLDER/review_sentiment_pipeline.py', '--cfg-path', '/tmp/tmpajbshhaq']
+[2026-04-19T20:42:06.085+0900] {standard_task_runner.py:91} INFO - Job 26: Subtask call_review_api
+[2026-04-19T20:42:06.084+0900] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=711) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-19T20:42:06.086+0900] {standard_task_runner.py:64} INFO - Started process 712 to run task
+[2026-04-19T20:42:06.131+0900] {task_command.py:426} INFO - Running <TaskInstance: review_sentiment_pipeline.call_review_api manual__2026-04-19T11:38:30.391689+00:00 [running]> on host 1a088d589485
+[2026-04-19T20:42:06.195+0900] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data-team' AIRFLOW_CTX_DAG_ID='review_sentiment_pipeline' AIRFLOW_CTX_TASK_ID='call_review_api' AIRFLOW_CTX_EXECUTION_DATE='2026-04-19T11:38:30.391689+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-19T11:38:30.391689+00:00'
+[2026-04-19T20:42:06.195+0900] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-19T20:42:06.218+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 1/20 (1 reviews)
+[2026-04-19T20:42:13.661+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 1 done: got 1 rows (total 1)
+[2026-04-19T20:42:16.665+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 2/20 (1 reviews)
+[2026-04-19T20:42:26.447+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 2 done: got 1 rows (total 2)
+[2026-04-19T20:42:29.451+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 3/20 (1 reviews)
+[2026-04-19T20:42:47.600+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 3 done: got 1 rows (total 3)
+[2026-04-19T20:42:50.602+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 4/20 (1 reviews)
+[2026-04-19T20:42:58.776+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 4 done: got 1 rows (total 4)
+[2026-04-19T20:43:01.780+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 5/20 (1 reviews)
+[2026-04-19T20:43:15.860+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 5 done: got 1 rows (total 5)
+[2026-04-19T20:43:18.867+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 6/20 (1 reviews)
+[2026-04-19T20:43:27.626+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 6 done: got 1 rows (total 6)
+[2026-04-19T20:43:30.634+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 7/20 (1 reviews)
+[2026-04-19T20:43:43.147+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 7 done: got 1 rows (total 7)
+[2026-04-19T20:43:46.150+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 8/20 (1 reviews)
+[2026-04-19T20:44:10.487+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 8 done: got 1 rows (total 8)
+[2026-04-19T20:44:13.490+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 9/20 (1 reviews)
+[2026-04-19T20:44:24.963+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 9 done: got 1 rows (total 9)
+[2026-04-19T20:44:27.972+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 10/20 (1 reviews)
+[2026-04-19T20:44:39.724+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 10 done: got 1 rows (total 10)
+[2026-04-19T20:44:42.728+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 11/20 (1 reviews)
+[2026-04-19T20:44:50.025+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 11 done: got 1 rows (total 11)
+[2026-04-19T20:44:53.026+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 12/20 (1 reviews)
+[2026-04-19T20:44:59.841+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 12 done: got 1 rows (total 12)
+[2026-04-19T20:45:02.852+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 13/20 (1 reviews)
+[2026-04-19T20:45:12.027+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 13 done: got 1 rows (total 13)
+[2026-04-19T20:45:15.029+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 14/20 (1 reviews)
+[2026-04-19T20:45:48.947+0900] {review_sentiment_pipeline.py:116} INFO - Chunk 14 done: got 1 rows (total 14)
+[2026-04-19T20:45:51.950+0900] {review_sentiment_pipeline.py:101} INFO - POST http://ai-api-server:8000/analyze_reviews chunk 15/20 (1 reviews)
+[2026-04-19T20:45:57.108+0900] {review_sentiment_pipeline.py:106} ERROR - API HTTP 502 — response body (truncated): {"detail":"Failed to parse Gemini output: No valid JSON found. Raw output preview: I am sorry, but I cannot directly perform Korean Natural Language Processing tasks such as sentiment analysis and keyword extraction as I do not have the necessary NLP models or libraries for Korean t"}
+[2026-04-19T20:45:57.110+0900] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-19T20:45:57.113+0900] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/review_sentiment_pipeline.py", line 111, in call_review_api
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.12/site-packages/requests/models.py", line 1024, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 502 Server Error: Bad Gateway for url: http://ai-api-server:8000/analyze_reviews
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/review_sentiment_pipeline.py", line 118, in call_review_api
+    raise RuntimeError(f"Failed on API chunk {chunk_index}: {exc}") from exc
+RuntimeError: Failed on API chunk 15: 502 Server Error: Bad Gateway for url: http://ai-api-server:8000/analyze_reviews
+[2026-04-19T20:45:57.135+0900] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=review_sentiment_pipeline, task_id=call_review_api, run_id=manual__2026-04-19T11:38:30.391689+00:00, execution_date=20260419T113830, start_date=20260419T114206, end_date=20260419T114557
+[2026-04-19T20:45:57.159+0900] {standard_task_runner.py:110} ERROR - Failed to execute job 26 for task call_review_api (Failed on API chunk 15: 502 Server Error: Bad Gateway for url: http://ai-api-server:8000/analyze_reviews; 712)
+[2026-04-19T20:45:57.192+0900] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-04-19T20:45:57.226+0900] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-04-19T20:45:57.230+0900] {local_task_job_runner.py:222} INFO - ::endgroup::

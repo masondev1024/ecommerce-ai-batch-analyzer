@@ -1,0 +1,46 @@
+[2026-04-19T17:50:01.150+0900] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-04-19T17:50:01.176+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: review_sentiment_pipeline.extract_pending_reviews manual__2026-04-19T08:50:00.468165+00:00 [queued]>
+[2026-04-19T17:50:01.182+0900] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: review_sentiment_pipeline.extract_pending_reviews manual__2026-04-19T08:50:00.468165+00:00 [queued]>
+[2026-04-19T17:50:01.182+0900] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-04-19T17:50:01.190+0900] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): extract_pending_reviews> on 2026-04-19 08:50:00.468165+00:00
+[2026-04-19T17:50:01.196+0900] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'review_sentiment_pipeline', 'extract_pending_reviews', 'manual__2026-04-19T08:50:00.468165+00:00', '--job-id', '65', '--raw', '--subdir', 'DAGS_FOLDER/review_sentiment_pipeline.py', '--cfg-path', '/tmp/tmpq98sb3u8']
+[2026-04-19T17:50:01.199+0900] {standard_task_runner.py:91} INFO - Job 65: Subtask extract_pending_reviews
+[2026-04-19T17:50:01.199+0900] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=891) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-04-19T17:50:01.200+0900] {standard_task_runner.py:64} INFO - Started process 892 to run task
+[2026-04-19T17:50:01.240+0900] {task_command.py:426} INFO - Running <TaskInstance: review_sentiment_pipeline.extract_pending_reviews manual__2026-04-19T08:50:00.468165+00:00 [running]> on host 6326c66d80ba
+[2026-04-19T17:50:01.297+0900] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data-team' AIRFLOW_CTX_DAG_ID='review_sentiment_pipeline' AIRFLOW_CTX_TASK_ID='extract_pending_reviews' AIRFLOW_CTX_EXECUTION_DATE='2026-04-19T08:50:00.468165+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-04-19T08:50:00.468165+00:00'
+[2026-04-19T17:50:01.298+0900] {taskinstance.py:430} INFO - ::endgroup::
+[2026-04-19T17:50:01.332+0900] {base.py:84} INFO - Using connection ID 'mysql_reviews' for task execution.
+[2026-04-19T17:50:01.343+0900] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-04-19T17:50:01.344+0900] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/review_sentiment_pipeline.py", line 68, in extract_pending_reviews
+    cursor.execute(sql)
+  File "/home/airflow/.local/lib/python3.12/site-packages/MySQLdb/cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/MySQLdb/cursors.py", line 330, in _query
+    db.query(q)
+  File "/home/airflow/.local/lib/python3.12/site-packages/MySQLdb/connections.py", line 261, in query
+    _mysql.connection.query(self, query)
+MySQLdb.ProgrammingError: (1146, "Table 'my_datawarehouse.reviews' doesn't exist")
+[2026-04-19T17:50:01.357+0900] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=review_sentiment_pipeline, task_id=extract_pending_reviews, run_id=manual__2026-04-19T08:50:00.468165+00:00, execution_date=20260419T085000, start_date=20260419T085001, end_date=20260419T085001
+[2026-04-19T17:50:01.363+0900] {standard_task_runner.py:110} ERROR - Failed to execute job 65 for task extract_pending_reviews ((1146, "Table 'my_datawarehouse.reviews' doesn't exist"); 892)
+[2026-04-19T17:50:01.382+0900] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-04-19T17:50:01.397+0900] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-04-19T17:50:01.398+0900] {local_task_job_runner.py:222} INFO - ::endgroup::
