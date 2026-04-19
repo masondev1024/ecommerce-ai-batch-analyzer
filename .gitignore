@@ -211,5 +211,5 @@ __marimo__/
 # git rm -r --cached logs/
 logs/
 logs/**
-
+docker-compose.yaml
 *.log
