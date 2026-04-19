@@ -8501,3 +8501,142 @@ File Path                                            PID  Runtime      # DAGs   
 /opt/airflow/dags/review_sentiment_pipeline_v2.py                           1           0  0.16s           2026-04-19T13:37:47
 /opt/airflow/dags/review_sentiment_pipeline.py       882  0.01s             1           0  0.08s           2026-04-19T13:37:19
 ================================================================================
+[2026-04-19T22:37:59.552+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:37:59.686+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:38:09.815+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:38:09.824+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:38:20.093+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:38:20.098+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:38:20.114+0900] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                            PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/review_sentiment_pipeline_v2.py                           1           0  0.35s           2026-04-19T13:38:18
+/opt/airflow/dags/review_sentiment_pipeline.py       898  0.00s             1           0  0.08s           2026-04-19T13:37:49
+================================================================================
+[2026-04-19T22:38:30.234+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:38:30.242+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:38:40.352+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:38:40.358+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:38:50.551+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:38:50.558+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:38:50.579+0900] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                            PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/review_sentiment_pipeline_v2.py                           1           0  0.22s           2026-04-19T13:38:48
+/opt/airflow/dags/review_sentiment_pipeline.py       914  0.01s             1           0  0.09s           2026-04-19T13:38:20
+================================================================================
+[2026-04-19T22:39:00.723+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:39:00.759+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:39:10.861+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:39:10.865+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:39:20.988+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:39:20.997+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:39:21.034+0900] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                            PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/review_sentiment_pipeline_v2.py                           1           0  0.20s           2026-04-19T13:39:19
+/opt/airflow/dags/review_sentiment_pipeline.py       930  0.01s             1           0  0.10s           2026-04-19T13:38:50
+================================================================================
+[2026-04-19T22:39:31.163+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:39:31.180+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:39:41.288+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:39:41.296+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:39:51.553+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:39:51.558+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:39:51.576+0900] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                            PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/review_sentiment_pipeline_v2.py                           1           0  0.26s           2026-04-19T13:39:49
+/opt/airflow/dags/review_sentiment_pipeline.py       946  0.00s             1           0  0.11s           2026-04-19T13:39:21
+================================================================================
+[2026-04-19T22:40:01.689+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:40:01.704+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:40:11.815+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:40:11.824+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:40:22.018+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:40:22.030+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:40:22.049+0900] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                            PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/review_sentiment_pipeline_v2.py                           1           0  0.19s           2026-04-19T13:40:20
+/opt/airflow/dags/review_sentiment_pipeline.py       962  0.00s             1           0  0.09s           2026-04-19T13:39:51
+================================================================================
+[2026-04-19T22:40:32.187+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:40:32.199+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:40:42.305+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:40:42.311+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:40:52.453+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:40:52.464+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:40:52.487+0900] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                            PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/review_sentiment_pipeline_v2.py                           1           0  0.22s           2026-04-19T13:40:50
+/opt/airflow/dags/review_sentiment_pipeline.py       978  0.01s             1           0  0.08s           2026-04-19T13:40:22
+================================================================================
+[2026-04-19T22:41:02.599+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:41:02.609+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:41:12.705+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:41:12.715+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:41:22.874+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:41:22.882+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:41:22.902+0900] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                            PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/review_sentiment_pipeline_v2.py                           1           0  0.17s           2026-04-19T13:41:20
+/opt/airflow/dags/review_sentiment_pipeline.py       995  0.01s             1           0  0.07s           2026-04-19T13:40:52
+================================================================================
+[2026-04-19T22:41:33.005+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:41:33.021+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:41:43.156+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:41:43.160+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:41:53.318+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:41:53.324+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:41:53.348+0900] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                            PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/review_sentiment_pipeline_v2.py                           1           0  0.25s           2026-04-19T13:41:51
+/opt/airflow/dags/review_sentiment_pipeline.py      1011  0.01s             1           0  0.10s           2026-04-19T13:41:22
+================================================================================
+[2026-04-19T22:42:03.446+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:42:03.458+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:42:13.589+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:42:13.599+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:42:23.733+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:42:23.737+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:42:23.757+0900] {manager.py:878} INFO - 
+================================================================================
+DAG File Processing Stats
+
+File Path                                            PID  Runtime      # DAGs    # Errors  Last Runtime    Last Run
+-------------------------------------------------  -----  ---------  --------  ----------  --------------  -------------------
+/opt/airflow/dags/review_sentiment_pipeline_v2.py                           1           0  0.17s           2026-04-19T13:42:21
+/opt/airflow/dags/review_sentiment_pipeline.py      1027  0.01s             1           0  0.11s           2026-04-19T13:41:53
+================================================================================
+[2026-04-19T22:42:33.853+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:42:33.861+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
+[2026-04-19T22:42:43.968+0900] {manager.py:737} INFO - Searching for files in /opt/airflow/dags
+[2026-04-19T22:42:43.975+0900] {manager.py:740} INFO - There are 2 files in /opt/airflow/dags
