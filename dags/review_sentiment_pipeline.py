@@ -10,11 +10,12 @@ import requests
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.mysql.hooks.mysql import MySqlHook
+from kafka import KafkaConsumer
 
 MYSQL_CONN_ID = "mysql_reviews"
-# Smaller chunks = faster Gemini CLI per request (less subprocess timeout risk).
-CHUNK_SIZE = int(os.getenv("REVIEW_CHUNK_SIZE", "50"))
-REQUEST_DELAY_SECONDS = 3
+# Larger chunks for better throughput with local model
+CHUNK_SIZE = int(os.getenv("REVIEW_CHUNK_SIZE", "500"))
+REQUEST_DELAY_SECONDS = 1
 
 
 def _chunked(items: List[Dict[str, Any]], chunk_size: int) -> List[List[Dict[str, Any]]]:
@@ -53,31 +54,28 @@ def _repair_utf8_bytes_misdecoded_as_latin1(s: str) -> str:
         return s
 
 
-def extract_pending_reviews(**_: Dict[str, Any]) -> List[Dict[str, Any]]:
-    hook = MySqlHook(mysql_conn_id=MYSQL_CONN_ID)
-    sql = """
-        SELECT review_id, user_id, review_text
-        FROM reviews
-        WHERE status = 'pending'
-        ORDER BY review_id ASC
-    """
-    conn = hook.get_conn()
-    try:
-        with conn.cursor() as cursor:
-            cursor.execute("SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci")
-            cursor.execute(sql)
-            records = cursor.fetchall()
-    finally:
-        conn.close()
-    reviews = [
-        {
-            "review_id": row[0],
-            "user_id": _repair_utf8_bytes_misdecoded_as_latin1(_mysql_text_cell(row[1])),
-            "review_text": _repair_utf8_bytes_misdecoded_as_latin1(_mysql_text_cell(row[2])),
-        }
-        for row in records
-    ]
-    logging.info("Extracted %s pending reviews", len(reviews))
+def extract_reviews_from_kafka(**_: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Consume reviews from Kafka topic."""
+    consumer = KafkaConsumer(
+        'reviews',
+        bootstrap_servers=['kafka:29092'],
+        auto_offset_reset='earliest',
+        enable_auto_commit=True,
+        group_id='airflow-consumer',
+        value_deserializer=lambda x: json.loads(x.decode('utf-8'))
+    )
+    
+    reviews = []
+    timeout = 10  # seconds
+    start_time = time.time()
+    
+    for message in consumer:
+        reviews.append(message.value)
+        if time.time() - start_time > timeout:
+            break
+    
+    consumer.close()
+    logging.info("Consumed %s reviews from Kafka", len(reviews))
     return reviews
 
 
@@ -176,8 +174,8 @@ with DAG(
     tags=["ecommerce", "review", "gemini", "batch"],
 ) as dag:
     t1 = PythonOperator(
-        task_id="extract_pending_reviews",
-        python_callable=extract_pending_reviews,
+        task_id="extract_reviews_from_kafka",
+        python_callable=extract_reviews_from_kafka,
     )
 
     t2 = PythonOperator(

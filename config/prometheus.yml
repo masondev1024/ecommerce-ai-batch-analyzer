@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'ai-api-server'
+    static_configs:
+      - targets: ['ai-api-server:8000']
+
+  - job_name: 'airflow'
+    static_configs:
+      - targets: ['airflow-webserver:8080']

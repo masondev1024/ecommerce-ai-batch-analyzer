@@ -1,34 +1,66 @@
 # ecommerce-ai-batch-analyzer
 
-
-An end-to-end Microservices Architecture (MSA) data pipeline that performs asynchronous sentiment analysis and keyword extraction on E-commerce reviews using the Gemini AI API.
+An end-to-end Microservices Architecture (MSA) data pipeline that performs asynchronous sentiment analysis and keyword extraction on E-commerce reviews using local Hugging Face models. Enhanced with modern data engineering technologies for portfolio demonstration.
 
 ## 📌 Architecture Overview
 
-This project is built with a strict separation of concerns, dividing the orchestration and the heavy AI computation into isolated, scalable services:
+This project is built with a strict separation of concerns, dividing the orchestration, data ingestion, AI computation, storage, and monitoring into isolated, scalable services:
 
-* **Orchestration (Apache Airflow):** Manages the scheduling, task dependencies, and database I/O.
-* **AI Inference (FastAPI):** An independent, purely API-driven server dedicated to communicating with the Gemini LLM.
+* **Orchestration (Apache Airflow):** Manages the scheduling, task dependencies, and data processing workflows.
+* **Data Ingestion (Apache Kafka):** Handles real-time data streaming and decoupling of data producers/consumers.
+* **AI Inference (FastAPI):** An independent, purely API-driven server for local ML model inference with caching.
 * **Data Warehouse (MySQL):** Stores the raw and analyzed E-commerce review data.
 * **Metadata DB (PostgreSQL):** Stores Airflow's internal metadata.
+* **Caching (Redis):** Provides high-performance caching for analysis results.
+* **Object Storage (MinIO):** S3-compatible storage for data artifacts and backups.
+* **Monitoring (Prometheus + Grafana):** Observability stack for metrics collection and visualization.
 
-### Why MSA?
-By decoupling the Airflow workers from the AI API server, we achieve:
-1.  **Independent Scalability:** The FastAPI server can be scaled out independently if the API load increases.
-2.  **Fault Isolation:** If the AI API times out or hits rate limits, it does not crash the Airflow scheduler.
-3.  **High Concurrency:** The FastAPI server utilizes `asyncio` and `google-generativeai` SDK to process multiple LLM requests concurrently without blocking OS threads, drastically improving batch processing speed compared to synchronous CLI calls.
+### Why MSA with Modern Tech Stack?
+By adopting industry-standard technologies, this project demonstrates:
+1. **Scalability:** Independent scaling of each service based on load.
+2. **Reliability:** Fault isolation and event-driven architecture with Kafka.
+3. **Performance:** Redis caching and local ML inference eliminate external API costs.
+4. **Observability:** Comprehensive monitoring with Prometheus metrics and Grafana dashboards.
+5. **Data Engineering Best Practices:** ETL pipelines, data quality checks, and modern storage solutions.
 
 ## 🛠 Tech Stack
 
 * **Language:** Python 3.11+
 * **Orchestration:** Apache Airflow 2.9 (LocalExecutor)
+* **Streaming:** Apache Kafka 7.4 + Zookeeper
 * **API Server:** FastAPI, Uvicorn, Pydantic
-* **AI / LLM:** Google Gemini 2.0 Flash (`google-generativeai` Async SDK)
-* **Database:** MySQL 8.0, PostgreSQL 15
+* **AI / ML:** Hugging Face Transformers (Local Inference)
+* **Databases:** MySQL 8.0, PostgreSQL 15
+* **Caching:** Redis 7
+* **Storage:** MinIO (S3-compatible)
+* **Monitoring:** Prometheus, Grafana
 * **Infrastructure:** Docker & Docker Compose
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 * Docker and Docker Compose installed.
-* A valid Google Gemini API Key.
+
+### Quick Start
+```bash
+# Clone the repository
+git clone <repository-url>
+cd ecommerce-ai-batch-analyzer
+
+# Start all services
+docker-compose up -d
+
+# Access services:
+# Airflow UI: http://localhost:8080 (admin/admin)
+# Grafana: http://localhost:3000 (admin/admin)
+# MinIO: http://localhost:9001 (minioadmin/minioadmin)
+# API Server: http://localhost:8000
+# Prometheus: http://localhost:9090
+```
+
+### Data Flow
+1. Reviews are produced to Kafka topic 'reviews'
+2. Airflow DAG consumes from Kafka and processes in batches
+3. FastAPI server performs sentiment analysis with local models
+4. Results are cached in Redis and stored in MySQL
+5. Metrics are collected by Prometheus and visualized in Grafana

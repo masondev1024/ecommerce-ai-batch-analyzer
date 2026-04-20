@@ -4,14 +4,18 @@ import os
 import asyncio
 from typing import Any, Dict, List, Literal
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from pydantic import BaseModel, Field
 from starlette.responses import JSONResponse
 
-# Google Generative AI 공식 SDK 임포트
-import google.generativeai as genai
-from google.generativeai.types import GenerationConfig
-from google.api_core.exceptions import ResourceExhausted, InternalServerError
+# Hugging Face Transformers for local sentiment analysis
+from transformers import pipeline
+from sklearn.feature_extraction.text import TfidfVectorizer
+import re
+
+# Monitoring
+from prometheus_client import Counter, Histogram, generate_latest
+import redis
 
 if not logging.getLogger().handlers:
     logging.basicConfig(
@@ -27,6 +31,15 @@ app = FastAPI(
     default_response_class=UTF8JSONResponse,
 )
 
+# Middleware for metrics
+@app.middleware("http")
+async def add_metrics(request: Request, call_next):
+    start_time = REQUEST_LATENCY.time()
+    response = await call_next(request)
+    REQUEST_LATENCY.labels(method=request.method, endpoint=request.url.path).observe(start_time)
+    REQUEST_COUNT.labels(method=request.method, endpoint=request.url.path, status=response.status_code).inc()
+    return response
+
 logger = logging.getLogger(__name__)
 
 # --- Models ---
@@ -41,71 +54,74 @@ class ReviewOut(BaseModel):
     keywords: List[str] = Field(default_factory=list)
 
 # --- Global Initialization ---
-# API Key 초기화
-api_key = os.getenv("GEMINI_API_KEY")
-if not api_key:
-    logger.warning("GEMINI_API_KEY is not set in environment variables.")
-else:
-    genai.configure(api_key=api_key)
+# Load Hugging Face sentiment analysis model
+sentiment_model = pipeline("sentiment-analysis", model="nlptown/bert-base-multilingual-uncased-sentiment")
 
-# 동시성 제어: 한 번에 LLM API로 날아가는 최대 동시 요청 수
-# 이 값이 너무 크면 429 Rate Limit 에러가 빈발하며, 너무 작으면 처리 속도가 느려집니다.
+# TF-IDF for keyword extraction
+vectorizer = TfidfVectorizer(max_features=100, stop_words=None)  # Adjust as needed
+
+# 동시성 제어: 한 번에 처리되는 최대 동시 요청 수
 MAX_CONCURRENCY = int(os.getenv("MAX_CONCURRENCY", "10"))
 semaphore = asyncio.Semaphore(MAX_CONCURRENCY)
 
-def _gemini_model_id() -> str:
-    raw = (os.getenv("GEMINI_MODEL") or "gemini-2.0-flash").strip()
-    return raw.replace("models/", "")
+# Monitoring metrics
+REQUEST_COUNT = Counter('api_requests_total', 'Total API requests', ['method', 'endpoint', 'status'])
+REQUEST_LATENCY = Histogram('api_request_duration_seconds', 'Request duration in seconds', ['method', 'endpoint'])
 
-def _build_single_prompt(review: ReviewIn) -> str:
-    return (
-        "You are an expert AI data analyst highly trained in Korean Natural Language Processing (NLP). "
-        "Analyze the sentiment of the provided Korean review and extract 2-3 key phrases.\n\n"
-        "INSTRUCTIONS:\n"
-        "1. Determine the sentiment strictly as one of: 'positive', 'negative', or 'neutral'.\n"
-        "2. Extract 2-3 important keywords (in Korean).\n"
-        "3. Output MUST be a valid JSON object with keys: 'sentiment' (string) and 'keywords' (array of strings).\n\n"
-        f"REVIEW TEXT:\n{review.review_text}"
-    )
+# Redis for caching
+redis_client = redis.Redis(host='redis', port=6379, decode_responses=True)
 
-async def _analyze_single_review_async(review: ReviewIn, model: genai.GenerativeModel) -> ReviewOut:
-    """단일 리뷰를 분석하며, Rate Limit 발생 시 지수 백오프(Exponential Backoff)로 재시도합니다."""
-    prompt = _build_single_prompt(review)
-    max_retries = 3
-    base_delay = 2.0
+def _extract_keywords(text: str, num_keywords: int = 3) -> List[str]:
+    """Extract top keywords using TF-IDF."""
+    try:
+        # Simple tokenization (for Korean, better to use konlpy, but keeping simple)
+        words = re.findall(r'\b\w+\b', text)
+        if len(words) < num_keywords:
+            return words[:num_keywords]
+        tfidf_matrix = vectorizer.fit_transform([text])
+        feature_names = vectorizer.get_feature_names_out()
+        scores = tfidf_matrix.toarray()[0]
+        top_indices = scores.argsort()[-num_keywords:][::-1]
+        return [feature_names[i] for i in top_indices]
+    except Exception:
+        return []
 
-    for attempt in range(max_retries):
-        try:
-            # 세마포어를 통해 동시 실행되는 코루틴의 수를 제한
-            async with semaphore:
-                response = await model.generate_content_async(
-                    prompt,
-                    # JSON 모드 강제: 응답이 반드시 JSON 구조를 띄도록 강제 (Gemini 1.5 Pro/Flash 이상 지원)
-                    generation_config=GenerationConfig(
-                        response_mime_type="application/json",
-                        temperature=0.0
-                    )
-                )
+async def _analyze_single_review_async(review: ReviewIn) -> ReviewOut:
+    """Analyze single review using local Hugging Face model with Redis caching."""
+    cache_key = f"review:{review.review_id}"
+    cached_result = redis_client.get(cache_key)
+    if cached_result:
+        return ReviewOut.parse_raw(cached_result)
+    
+    try:
+        async with semaphore:
+            # Sentiment analysis
+            result = sentiment_model(review.review_text)[0]
+            label = result['label']  # e.g., '1 star', '2 stars', etc.
+            # Map to positive, negative, neutral
+            if '1' in label or '2' in label:
+                sentiment = 'negative'
+            elif '4' in label or '5' in label:
+                sentiment = 'positive'
+            else:
+                sentiment = 'neutral'
             
-            # 파싱 로직: JSON 모드를 사용하므로 정규식 없이 바로 loads 가능
-            result_dict = json.loads(response.text)
-            return ReviewOut(
+            # Keyword extraction
+            keywords = _extract_keywords(review.review_text)
+            
+            review_out = ReviewOut(
                 review_id=review.review_id,
-                sentiment=str(result_dict.get("sentiment", "unknown")).lower(),
-                keywords=[str(k) for k in result_dict.get("keywords", [])]
+                sentiment=sentiment,
+                keywords=keywords
             )
-
-        except ResourceExhausted:
-            wait_time = base_delay * (2 ** attempt)
-            logger.warning("Rate limit hit for review_id %s. Retrying in %s seconds...", review.review_id, wait_time)
-            await asyncio.sleep(wait_time)
-        except (InternalServerError, Exception) as exc:
-            logger.error("Failed to process review_id %s: %s", review.review_id, exc)
-            return ReviewOut(review_id=review.review_id, sentiment="error_parsing", keywords=[])
-
-    # 최대 재시도 횟수 초과
-    logger.error("Max retries exceeded for review_id %s", review.review_id)
-    return ReviewOut(review_id=review.review_id, sentiment="error_parsing", keywords=[])
+            
+            # Cache result
+            redis_client.setex(cache_key, 3600, review_out.json())  # Cache for 1 hour
+            
+            return review_out
+    except Exception as exc:
+        logger.error("Failed to process review_id %s: %s", review.review_id, exc)
+        return ReviewOut(review_id=review.review_id, sentiment="error_parsing", keywords=[])
 
 
 @app.get("/")
@@ -116,6 +132,10 @@ def home() -> dict[str, str]:
 def health() -> dict[str, str]:
     return {"status": "ok"}
 
+@app.get("/metrics")
+def metrics():
+    return generate_latest()
+
 @app.post("/analyze_reviews", response_model=List[ReviewOut])
 async def analyze_reviews(reviews: List[ReviewIn]) -> List[ReviewOut]:
     """
@@ -124,14 +144,8 @@ async def analyze_reviews(reviews: List[ReviewIn]) -> List[ReviewOut]:
     if not reviews:
         return []
 
-    if not api_key:
-        raise HTTPException(status_code=500, detail="GEMINI_API_KEY is not configured.")
-
-    model_name = _gemini_model_id()
-    model = genai.GenerativeModel(model_name)
-
     # 모든 리뷰에 대해 비동기 태스크 생성
-    tasks = [_analyze_single_review_async(review, model) for review in reviews]
+    tasks = [_analyze_single_review_async(review) for review in reviews]
     
     # asyncio.gather를 통해 모든 태스크를 동시에 실행 (세마포어에 의해 실제 동시 실행 수는 통제됨)
     results = await asyncio.gather(*tasks)
