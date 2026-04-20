@@ -41,22 +41,6 @@ By adopting industry-standard technologies, this project demonstrates:
 ### Prerequisites
 * Docker and Docker Compose installed.
 
-### Quick Start
-```bash
-# Clone the repository
-git clone <repository-url>
-cd ecommerce-ai-batch-analyzer
-
-# Start all services
-docker-compose up -d
-
-# Access services:
-# Airflow UI: http://localhost:8080 (admin/admin)
-# Grafana: http://localhost:3000 (admin/admin)
-# MinIO: http://localhost:9001 (minioadmin/minioadmin)
-# API Server: http://localhost:8000
-# Prometheus: http://localhost:9090
-```
 
 ### Data Flow
 1. Reviews are produced to Kafka topic 'reviews'
